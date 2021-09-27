@@ -1,0 +1,3 @@
+  'Types'
+    'prefix': 'typer'
+    'body': 'fmt.Printf("Type: %T", "${1:var}")'
