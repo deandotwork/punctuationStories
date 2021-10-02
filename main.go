@@ -6,8 +6,7 @@ import (
 	"io"
 	"log"
 	"os"
-	"os/exec"
-	"strconv"
+	"strings"
 )
 
 type Counts struct {
@@ -25,20 +24,26 @@ func wordCount(rdr io.Reader) map[string]float64 {
 }
 
 func totalWords() float64 {
-	cmd, err := exec.Command("sh", "counter.sh").Output()
-	if err != nil {
-		panic(err)
-	}
-	// TODO: Is there a better way to convert a slice of uints ([]uint8) to float64?
-	f := string(cmd)
-	words, err := strconv.ParseFloat(f, 64)
-	if err != nil {
-		panic(err)
+	scanner := bufio.NewScanner(strings.NewReader(srcFile))
+	scanner.Split(bufio.ScanWords)
+	words := 0.0
+	for scanner.Scan() {
+		words++
 	}
 	return words
 }
+
+func problem1() {
+	got := 1
+	want := 1
+
+	assert(got == want)
+}
+
+var srcFile string
+
 func main() {
-	srcFile, err := os.Open("file.txt")
+	srcFile, err := os.Open("pride.txt")
 	if err != nil {
 		log.Fatalln("Sorry, there was a problem opening the file", srcFile)
 	}
@@ -72,4 +77,5 @@ func main() {
 	fmt.Println("Exclamations ! :", counts["!"])
 	fmt.Printf("Number of Quotes: %1.0f\n\n", quotes)
 
+	problem1()
 }
