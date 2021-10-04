@@ -50,6 +50,7 @@ func main() {
 	defer srcFile.Close()
 
 	counts := wordCount(srcFile)
+	fmt.Println(counts)
 	spaces := counts[" "]
 	commas := counts[","]
 	periods := counts["."]
@@ -57,7 +58,7 @@ func main() {
 	fmt.Println("commas", commas)
 	fmt.Println("spaces", spaces)
 
-	for i := 0.0; i < commas/10; i++ {
+	for i := 0.0; i < commas/100; i++ {
 		fmt.Printf(",")
 	}
 	fmt.Println("periods", periods)
@@ -71,10 +72,13 @@ func main() {
 	}
 	// This measures the pause and pace of a story. Only relevant in relation to another txt?
 	area := (commas * periods) / totalWords()
-	fmt.Printf("The pause and pace is: %1.3f\n", area)
+	bookPages := totalWords()
+	fmt.Println("Number of Pages:\n", bookPages)
+	fmt.Printf("The pause and pace is: %4.3f\n", area)
 	fmt.Printf("With a ratio of commas to periods: 1:%1.2f\n", ratio)
 	fmt.Println("Questions ? :", counts["?"])
 	fmt.Println("Exclamations ! :", counts["!"])
+	fmt.Println(quotes)
 	fmt.Printf("Number of Quotes: %1.0f\n\n", quotes)
 
 	problem1()
