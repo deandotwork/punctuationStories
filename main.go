@@ -51,6 +51,8 @@ func main() {
 
 	counts := wordCount(srcFile)
 	fmt.Println(counts)
+	the := counts["the "]
+	fmt.Println("Number of The", the)
 	spaces := counts[" "]
 	commas := counts[","]
 	periods := counts["."]
